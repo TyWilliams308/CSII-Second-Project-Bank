@@ -9,6 +9,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
     account_id = 0
 
     def __init__(self, id, login_window) -> None:
+        """Initializes the bank window for the given account ID and loads existing data."""
         super().__init__()
         self.setupUi(self)
         self.account_id = id
@@ -21,6 +22,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.AccountNumberText.setText(str(id))
 
     def load_data(self) -> None:
+        """Loads previously saved account data for the current account from the CSV file."""
         try:
             with open("bankdata.csv", "r") as file:
                 reader = csv.reader(file)
@@ -43,6 +45,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
             pass
 
     def deposit(self) -> None:
+        """Adds the entered amount to the current balance and updates the last transaction date."""
         amount = self.DepositField.text().strip()
         try:
             amount = float(amount)
@@ -58,6 +61,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.ErrorLabel.setText(f"Successfully deposited ${amount:.2f}")
 
     def withdraw(self) -> None:
+        """Subtracts the entered amount from the balance, Does overdraw protection if enabled."""
         amount = self.WidthdrawField.text().strip()
         try:
             amount = float(amount)
@@ -79,6 +83,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.ErrorLabel.setText(f"Successfully withdrew ${amount:.2f}")
 
     def submit(self) -> None:
+        """Saves all account data to the CSV file and returns to the login window."""
         first = self.FirstNameField.text().strip()
         last = self.LastNameField.text().strip()
         dob = self.DobDate.text().strip()

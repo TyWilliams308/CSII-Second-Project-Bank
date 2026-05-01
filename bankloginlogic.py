@@ -8,12 +8,14 @@ from PyQt6.QtWidgets import *
 
 class Bankloginlogic(QMainWindow, Ui_MainBankWindow):
     def __init__(self) -> None:
+        """Initializes the bank login window and connects the login button."""
         super().__init__()
         self.setupUi(self)
 
         self.LoginButton.clicked.connect(lambda: self.submit())
 
     def submit(self) -> None:
+        """Validates the entered account number and password, then logs in or creates a new account."""
         id = self.AcountField.text().strip()
         password = self.PasswordField.text().strip()
 
@@ -62,12 +64,14 @@ class Bankloginlogic(QMainWindow, Ui_MainBankWindow):
                 return
 
     def create_account(self, id, password) -> None:
+        """Creates a new bank account and writes it to the CSV file."""
         with open("bankaccounts.csv", "a", newline="") as accounts:
             content = csv.writer(accounts)
             content.writerow([id, password])
         self.open_account(id)
 
     def open_account(self, id) -> None:
+        """Opens the bank window for the given account ID and closes the login window."""
         time.sleep(2)
         self.bank_window = Banklogic(
             id, self
