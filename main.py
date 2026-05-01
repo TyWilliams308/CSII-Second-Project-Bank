@@ -2,7 +2,7 @@ from bankloginlogic import *
 from PyQt6.QtWidgets import QApplication
 
 
-def main():
+def main() -> None:
     application = QApplication([])
     window = Bankloginlogic()
     window.show()

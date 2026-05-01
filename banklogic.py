@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import *
 class Banklogic(QMainWindow, Ui_MainWindow):
     account_id = 0
 
-    def __init__(self, id, login_window):
+    def __init__(self, id, login_window) -> None:
         super().__init__()
         self.setupUi(self)
         self.account_id = id
@@ -20,7 +20,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.load_data()
         self.AccountNumberText.setText(str(id))
 
-    def load_data(self):
+    def load_data(self) -> None:
         try:
             with open("bankdata.csv", "r") as file:
                 reader = csv.reader(file)
@@ -42,7 +42,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         except FileNotFoundError:
             pass
 
-    def deposit(self):
+    def deposit(self) -> None:
         amount = self.DepositField.text().strip()
         try:
             amount = float(amount)
@@ -57,7 +57,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.DepositField.clear()
         self.ErrorLabel.setText(f"Successfully deposited ${amount:.2f}")
 
-    def withdraw(self):
+    def withdraw(self) -> None:
         amount = self.WidthdrawField.text().strip()
         try:
             amount = float(amount)
@@ -78,7 +78,7 @@ class Banklogic(QMainWindow, Ui_MainWindow):
         self.WidthdrawField.clear()
         self.ErrorLabel.setText(f"Successfully withdrew ${amount:.2f}")
 
-    def submit(self):
+    def submit(self) -> None:
         first = self.FirstNameField.text().strip()
         last = self.LastNameField.text().strip()
         dob = self.DobDate.text().strip()

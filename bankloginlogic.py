@@ -7,13 +7,13 @@ from PyQt6.QtWidgets import *
 
 
 class Bankloginlogic(QMainWindow, Ui_MainBankWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
 
         self.LoginButton.clicked.connect(lambda: self.submit())
 
-    def submit(self):
+    def submit(self) -> None:
         id = self.AcountField.text().strip()
         password = self.PasswordField.text().strip()
 
@@ -61,13 +61,13 @@ class Bankloginlogic(QMainWindow, Ui_MainBankWindow):
                 self.create_account(id, password)
                 return
 
-    def create_account(self, id, password):
+    def create_account(self, id, password) -> None:
         with open("bankaccounts.csv", "a", newline="") as accounts:
             content = csv.writer(accounts)
             content.writerow([id, password])
         self.open_account(id)
 
-    def open_account(self, id):
+    def open_account(self, id) -> None:
         time.sleep(2)
         self.bank_window = Banklogic(
             id, self
